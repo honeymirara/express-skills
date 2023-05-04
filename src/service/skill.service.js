@@ -6,7 +6,12 @@ const arr = [
   { id: 5, title: 'pg' },
 ];
 
+const fs = require('fs');
+const path = './storage/storage.json';
+
+
 function getAllSkills() {
+  const array = JSON.parse(fs.readFileSync(path));
   return arr;
 };
 
