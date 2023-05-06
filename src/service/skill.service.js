@@ -11,34 +11,47 @@ const path = './storage/storage.json';
 
 
 function getAllSkills() {
-  const array = JSON.parse(fs.readFileSync(path));
+  const arr = JSON.parse(fs.readFileSync(path));
   return arr;
 };
 
 function getSkillById(id) {
+  const arr = JSON.parse(fs.readFileSync(path));
   const filtered = arr.filter(el => el.id == id);
+  
+  fs.writeFileSync(path, JSON.stringify(arr));
   return filtered;
 };
 
 function deleteSkill(id) {
+  const arr = JSON.parse(fs.readFileSync(path));
   const filtered = arr.filter(el => el.id != id);
+  
+  fs.writeFileSync(path, JSON.stringify(arr));
   return filtered;
 };
 
 function createSkill(title) {
-    const obj = { id: Math.floor(Math.random() * 10), title };
-    arr.push(obj);
-    return arr;
-  };
+  const arr = JSON.parse(fs.readFileSync(path));
+  const obj = { id: Math.floor(Math.random() * 10), title };
+  arr.push(obj);
+  
+  fs.writeFileSync(path, JSON.stringify(arr));
+  return arr;
+};
 
 function updateSkill(id, title) {
-    const filtered = arr.filter(el => el.id != id);
-    if (arr.length == filtered.length) throw new Error('bad id');
+  const arr = JSON.parse(fs.readFileSync(path));
+  const filtered = arr.filter(el => el.id != id);
+  if (arr.length == filtered.length) throw new Error('bad id');
 
-    const obj = { id, title };
-    filtered.push(obj);
-    return filtered;
+  const obj = { id, title };
+  filtered.push(obj);
+  
+  fs.writeFileSync(path, JSON.stringify(arr));
+  return filtered;
 };
+
 
 
 

@@ -14,7 +14,7 @@ route.get('/:id', (req, res) => {
         const data = getSkillById(id);
         res.status(200).send(data);
     }catch(err){
-        return err.message(res.status(404).send(data));
+        res.status(404).send(err.message);
     }
     
 });
@@ -25,7 +25,7 @@ route.delete('/:id', (req, res) => {
         const data = deleteSkill(id);
         res.status(200).send(data);
     } catch (err) {
-        return err.message(res.status(404).send(data));
+        res.status(404).send(err.message);
     }
 
 });
@@ -36,9 +36,8 @@ route.post('/', (req, res) => {
         const data = createSkill(title)
         res.status(200).send(data);
     } catch (err) {
-        return err.message(res.status(404).send(data))
+        res.status(404).send(err.message);
     }
-
 });
 
 route.put('/:id', (req, res) => {
@@ -48,7 +47,7 @@ route.put('/:id', (req, res) => {
         const data = updateSkill(id, title);
         res.status(200).send(data);
     } catch (err) {
-        return err.message(res.status(404).send(data));
+        res.status(404).send(err.message);
     }
 });
 
