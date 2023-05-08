@@ -1,11 +1,3 @@
-const arr = [
-  { id: 1, title: 'javascript' },
-  { id: 2, title: 'typescript' },
-  { id: 3, title: 'mongodb' },
-  { id: 4, title: 'mongoose' },
-  { id: 5, title: 'pg' },
-];
-
 const fs = require('fs');
 const path = './storage/storage.json';
 
@@ -18,39 +10,39 @@ function getAllSkills() {
 function getSkillById(id) {
   const arr = JSON.parse(fs.readFileSync(path));
   const filtered = arr.filter(el => el.id == id);
-  
-  fs.writeFileSync(path, JSON.stringify(arr));
-  return filtered;
-};
-
-function deleteSkill(id) {
-  const arr = JSON.parse(fs.readFileSync(path));
-  const filtered = arr.filter(el => el.id != id);
-  
   fs.writeFileSync(path, JSON.stringify(arr));
   return filtered;
 };
 
 function createSkill(title) {
   const arr = JSON.parse(fs.readFileSync(path));
-  const obj = { id: Math.floor(Math.random() * 10), title };
+  const obj = { id: arr.length + 1, title: title }
   arr.push(obj);
-  
   fs.writeFileSync(path, JSON.stringify(arr));
   return arr;
 };
 
 function updateSkill(id, title) {
-  const arr = JSON.parse(fs.readFileSync(path));
-  const filtered = arr.filter(el => el.id != id);
-  if (arr.length == filtered.length) throw new Error('bad id');
+const arr = JSON.parse(fs.readFileSync(path));
+const filtered = arr.filter(el => el.id != id);
+if (arr.length == filtered.length) throw new Error('id does not exist');
 
-  const obj = { id, title };
-  filtered.push(obj);
-  
-  fs.writeFileSync(path, JSON.stringify(arr));
-  return filtered;
+const obj = {id, title};
+filtered.push(obj);
+
+fs.writeFileSync(path, JSON.stringify(arr));
+return arr;
 };
+
+
+function deleteSkill(id) {
+  const arr = JSON.parse(fs, readFileSync(path));
+  const filtered = arr.filter(el => el.id !=id);
+  fs.writeFileSync(path, JSON.stringify(arr));
+  return arr;
+};
+
+
 
 
 
