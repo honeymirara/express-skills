@@ -1,5 +1,6 @@
 const express = require('express');
-const { getAllSkills, getSkillById, deleteSkill, createSkill } = require('../service/skill.service');
+const { getAllSkills, getSkillById, deleteSkill, createSkill, updateSkill
+} = require('../service/skill.service');
 const route = express.Router();
 
 route.get('/', (req, res) => {
@@ -23,6 +24,14 @@ route.post('/', (req, res) => {
     const { title } = req.body;
     const data = createSkill(title)
     res.status(200).send(data);
-})
+});
+
+route.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+    const data = updateSkill(id, title);
+    res.status(200).send(data);
+
+});
 
 module.exports = route;
