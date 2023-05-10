@@ -17,22 +17,22 @@ function getSkillById(id) {
 
 function deleteSkill(id) {
   const filtered = arr.filter(el => el.id != id);
-  return filtered
+  return filtered;
 };
 
 function createSkill(title) {
-  const obj = { id: Math.floor(Math.random() * 10), title };
-  arr.push(obj);
-  return arr;
-};
+    const obj = { id: Math.floor(Math.random() * 10), title };
+    arr.push(obj);
+    return arr;
+  };
 
 function updateSkill(id, title) {
-  const filtered = arr.filter(el => el.id != id);
-  if (arr.length == filtered.length) throw new Error('id is not found');
+    const filtered = arr.filter(el => el.id != id);
+    if (arr.length == filtered.length) throw new Error('bad id');
 
-  const obj = { id, title };
-  filtered.push(obj);
-  return filtered;
+    const obj = { id, title };
+    filtered.push(obj);
+    return filtered;
 };
 
 

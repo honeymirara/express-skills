@@ -9,29 +9,47 @@ route.get('/', (req, res) => {
 });
 
 route.get('/:id', (req, res) => {
-    const { id } = req.params;
-    const data = getSkillById(id);
-    res.status(200).send(data);
+    try {
+        const { id } = req.params;
+        const data = getSkillById(id);
+        res.status(200).send(data);
+    }catch(err){
+        return err.message(res.status(404).send(data));
+    }
+    
 });
 
 route.delete('/:id', (req, res) => {
-    const { id } = req.params;
-    const data = deleteSkill(id);
-    res.status(200).send(data);
+    try {
+        const { id } = req.params;
+        const data = deleteSkill(id);
+        res.status(200).send(data);
+    } catch (err) {
+        return err.message(res.status(404).send(data));
+    }
+
 });
 
 route.post('/', (req, res) => {
-    const { title } = req.body;
-    const data = createSkill(title)
-    res.status(200).send(data);
+    try {
+        const { title } = req.body;
+        const data = createSkill(title)
+        res.status(200).send(data);
+    } catch (err) {
+        return err.message(res.status(404).send(data))
+    }
+
 });
 
 route.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const { title } = req.body;
-    const data = updateSkill(id, title);
-    res.status(200).send(data);
-
+    try {
+        const { id } = req.params;
+        const { title } = req.body;
+        const data = updateSkill(id, title);
+        res.status(200).send(data);
+    } catch (err) {
+        return err.message(res.status(404).send(data));
+    }
 });
 
 module.exports = route;
