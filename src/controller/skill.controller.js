@@ -1,7 +1,8 @@
 const express = require('express');
-const { getAllSkills, getSkillById, deleteSkill, createSkill, updateSkill
-} = require('../service/skill.service');
+const { Service } = require('../service/skill.service');
 const route = express.Router();
+
+const service = new Service();
 
 route.get('/', (req, res) => {
     const data = getAllSkills();
@@ -13,10 +14,10 @@ route.get('/:id', (req, res) => {
         const { id } = req.params;
         const data = getSkillById(id);
         res.status(200).send(data);
-    }catch(err){
+    } catch (err) {
         res.status(404).send(err.message);
     }
-    
+
 });
 
 route.delete('/:id', (req, res) => {
